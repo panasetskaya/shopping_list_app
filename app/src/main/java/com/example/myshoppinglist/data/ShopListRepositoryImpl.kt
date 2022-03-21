@@ -10,6 +10,13 @@ object ShopListRepositoryImpl: ShopListRepository {
 
     private var autoIncrId = 0
 
+    init {
+        for (i in 0..10) {
+            val item = ShopItem("Name $i", i)
+            addShopItem(item)
+        }
+    }
+
     override fun getItemById(id: Int): ShopItem {
         return shopList.find { it.id == id
         } ?: throw RuntimeException("Element with id $id not found")
