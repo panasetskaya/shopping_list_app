@@ -56,4 +56,18 @@ class MainActivity : AppCompatActivity() {
         }
         alertDialog.show()
     }
+
+    private fun deleteDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle("Удаление")
+        alertDialog.setMessage("Вы уверены, что хотите удалить этот товар из списка?")
+        alertDialog.setPositiveButton("Да") { dialog, i ->
+            TODO("Удаление из списка")
+            dialog.cancel()
+        }
+        alertDialog.setNegativeButton("Нет") { dialog, i ->
+            dialog.cancel()
+        }
+        alertDialog.show()
+    }
 }
