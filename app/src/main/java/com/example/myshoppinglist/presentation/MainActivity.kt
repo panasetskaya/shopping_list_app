@@ -1,5 +1,6 @@
 package com.example.myshoppinglist.presentation
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -42,7 +43,17 @@ class MainActivity : AppCompatActivity() {
                 viewModel.changeIsActiveState(it)
         }
         shopListAdapter.onShopItemClickListener =  {
-            Log.d("MyRes", "the item name: ${it.name}")
+            showSorryDialog()
         }
+    }
+
+    private fun showSorryDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle("Сорри")
+        alertDialog.setMessage("Пока нет возможности перейти к товару")
+        alertDialog.setPositiveButton("Ок") { dialog, i ->
+            dialog.cancel()
+        }
+        alertDialog.show()
     }
 }
