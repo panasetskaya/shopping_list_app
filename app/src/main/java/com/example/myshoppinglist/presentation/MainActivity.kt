@@ -2,6 +2,7 @@ package com.example.myshoppinglist.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshoppinglist.R
@@ -37,9 +38,11 @@ class MainActivity : AppCompatActivity() {
                 ShopListAdapter.MAX_POOL_SIZE
             )
         }
-
         shopListAdapter.onShopItemLongClickListener =  {
                 viewModel.changeIsActiveState(it)
-            }
+        }
+        shopListAdapter.onShopItemClickListener =  {
+            Log.d("MyRes", "the item name: ${it.name}")
         }
     }
+}
