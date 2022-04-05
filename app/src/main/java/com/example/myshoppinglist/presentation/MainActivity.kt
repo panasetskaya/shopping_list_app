@@ -18,12 +18,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupRecyclerView()
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.shopList.observe(this){
             shopListAdapter.submitList(it)
-
         }
+        setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
@@ -58,28 +57,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupSwipeListener(rvShopList: RecyclerView) {
-        val callback = object: ItemTouchHelper.SimpleCallback(
-            0,
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = shopListAdapter.currentList[viewHolder.adapterPosition]
-                deleteDialog(item)
-                        // здесь он таки убирает айтем в любом случае (правда, если не
-                    // удаляли, то при обратном скролле он появляется снова)
-            }
-        }
+        val callback = object: MyItemTouchCallback(viewModel, shopListAdapter) {}
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(rvShopList)
-
     }
 
     private fun showSorryDialog() {
@@ -87,20 +67,6 @@ class MainActivity : AppCompatActivity() {
         alertDialog.setTitle("Сорри")
         alertDialog.setMessage("Пока нет возможности перейти к товару")
         alertDialog.setPositiveButton("Ок") { dialog, i ->
-            dialog.cancel()
-        }
-        alertDialog.show()
-    }
-
-    private fun deleteDialog(item: ShopItem) {
-        val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setTitle("Удаление")
-        alertDialog.setMessage("Вы уверены, что хотите удалить этот товар из списка?")
-        alertDialog.setPositiveButton("Да") { dialog, i ->
-            viewModel.deleteShopItem(item)
-            dialog.cancel()
-        }
-        alertDialog.setNegativeButton("Нет") { dialog, i ->
             dialog.cancel()
         }
         alertDialog.show()
