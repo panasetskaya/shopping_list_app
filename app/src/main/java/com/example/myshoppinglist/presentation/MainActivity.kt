@@ -3,12 +3,10 @@ package com.example.myshoppinglist.presentation
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshoppinglist.R
-import com.example.myshoppinglist.domain.ShopItem
 
 class MainActivity : AppCompatActivity() {
 

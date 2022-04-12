@@ -50,7 +50,7 @@ open class MyItemTouchCallback(private val viewModel: MainViewModel, private val
         Log.d("MyTag", "show dX: $dX")
         if (dX > -300f && !isAlertDialogShowed) {
             isAlertDialogShowed = true
-            val alertDialog = AlertDialog.Builder(recyclerView.context)
+            val alertDialog = AlertDialog.Builder(recyclerView.context).setCancelable(false)
             alertDialog.setTitle("Удаление")
             alertDialog.setMessage("Вы уверены, что хотите удалить этот товар из списка?")
             alertDialog.setPositiveButton("Да") { dialog, i ->
