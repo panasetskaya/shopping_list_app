@@ -14,12 +14,6 @@ import com.google.android.material.textfield.TextInputLayout
 
 class ShopItemActivity : AppCompatActivity() {
 
-    private lateinit var tilName: TextInputLayout
-    private lateinit var tilCount: TextInputLayout
-    private lateinit var etName: TextInputEditText
-    private lateinit var etCount: TextInputEditText
-    private lateinit var buttonSave: Button
-    private lateinit var viewModel: ShopItemViewModel
     private var screenMode = SCREEN_MODE_DEFAULT
     private var id = ID_DEFAULT
 
@@ -27,91 +21,18 @@ class ShopItemActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_item)
         parseIntent()
-        viewModel = ViewModelProvider(this)[ShopItemViewModel::class.java]
-        initViews()
-        addEditTextListeners()
-        when (screenMode) {
-            MODE_EDIT -> launchEditMode()
-            MODE_ADD -> launchAddMode()
-        }
-        observeViewModel()
+        launchRightMode()
     }
 
-    private fun observeViewModel() {
-        viewModel.nameErrorStateLiveData.observe(this) {
-            val message = if (it) {
-                getString(R.string.error_input_name)
-            } else {
-                null
-            }
-            tilName.error = message
+    private fun launchRightMode() {
+        val fragment = when (screenMode) {
+            MODE_ADD -> ShopItemFragment.newInstanceAddItem()
+            MODE_EDIT -> ShopItemFragment.newInstanceEditItem(id)
+            else -> throw RuntimeException("Unknown screen mode")
         }
-        viewModel.countErrorStateLiveData.observe(this) {
-            val message = if (it) {
-                getString(R.string.error_input_count)
-            } else {
-                null
-            }
-            tilCount.error = message
-        }
-        viewModel.mayCloseLiveData.observe(this) {
-            finish()
-        }
-    }
-
-    private fun addEditTextListeners() {
-        etName.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                viewModel.resetErrorState()
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-        })
-        etCount.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                viewModel.resetErrorState()
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-        })
-    }
-
-
-    private fun launchAddMode() {
-        buttonSave.setOnClickListener {
-            val inputName = etName.text.toString()
-            val inputCount = etCount.text.toString()
-            viewModel.addShopItem(inputName, inputCount)
-        }
-    }
-
-    private fun launchEditMode() {
-        viewModel.getItemById(id)
-        viewModel.shopitemLiveData.observe(this) {
-            etName.setText(it.name)
-            etCount.setText(it.quantity.toString())
-        }
-        buttonSave.setOnClickListener {
-            val inputName = etName.text?.toString()
-            val inputCount = etCount.text?.toString()
-            viewModel.editShopItem(inputName, inputCount)
-        }
-    }
-
-    private fun initViews() {
-        tilName = findViewById(R.id.til_name)
-        tilCount = findViewById(R.id.til_count)
-        etCount = findViewById(R.id.et_count)
-        etName = findViewById(R.id.et_name)
-        buttonSave = findViewById(R.id.button_save_item)
+        supportFragmentManager.beginTransaction()
+            .add(R.id.shop_item_container, fragment)
+            .commit()
     }
 
     private fun parseIntent() {
