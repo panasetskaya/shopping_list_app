@@ -5,20 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import com.example.myshoppinglist.domain.ShopItem
 import com.example.myshoppinglist.domain.ShopListRepository
 import java.lang.RuntimeException
+import kotlin.random.Random
 
 object ShopListRepositoryImpl: ShopListRepository {
 
-    private val shopList = mutableListOf<ShopItem>()
+    private val shopList = sortedSetOf<ShopItem>({ o1, o2 -> o1.id.compareTo(o2.id) })
     private val shopListLiveData = MutableLiveData<List<ShopItem>>()
 
     private var autoIncrId = 0
 
     init {
-        for (i in 0..10) {
-            val item = ShopItem("Name $i", i)
+        for (i in 0..100) {
+            val item = ShopItem("Name $i", i, Random.nextBoolean())
             addShopItem(item)
         }
-        updateList()
     }
 
     override fun getItemById(id: Int): ShopItem {
