@@ -18,9 +18,13 @@ class ShopItemViewModel: ViewModel() {
     private val addShopItemUseCase = AddShopItemUseCase(repository)
     private val getItemByIdUseCase = GetItemByIdUseCase(repository)
 
-    private val _errorStateLiveData = MutableLiveData<Boolean>()
-    val errorStateLiveData: LiveData<Boolean>
-        get() = _errorStateLiveData
+    private val _nameErrorStateLiveData = MutableLiveData<Boolean>()
+    val nameErrorStateLiveData: LiveData<Boolean>
+        get() = _nameErrorStateLiveData
+
+    private val _countErrorStateLiveData = MutableLiveData<Boolean>()
+    val countErrorStateLiveData: LiveData<Boolean>
+        get() = _countErrorStateLiveData
 
     private val _shopitemLiveData = MutableLiveData<ShopItem>()
     val shopitemLiveData: LiveData<ShopItem>
@@ -73,15 +77,20 @@ class ShopItemViewModel: ViewModel() {
 
     private fun validateInput(name: String, count: Int): Boolean {
         var result = true
-        if (name.isBlank() || count<=0) {
-            _errorStateLiveData.value = true
+        if (name.isBlank()) {
+            _nameErrorStateLiveData.value = true
+            result = false
+        }
+        if (count<=0) {
+            _countErrorStateLiveData.value = true
             result = false
         }
         return result
     }
 
-    private fun resetErrorState() {
-        _errorStateLiveData.value = false
+    fun resetErrorState() {
+        _nameErrorStateLiveData.value = false
+        _countErrorStateLiveData.value = false
     }
 
     private fun finishWork() {
