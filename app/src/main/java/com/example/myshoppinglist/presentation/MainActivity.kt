@@ -3,6 +3,9 @@ package com.example.myshoppinglist.presentation
 import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainer
+import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +16,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var shopListAdapter: ShopListAdapter
+    private var container: FragmentContainerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        container = findViewById(R.id.shop_item_container_main)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.shopList.observe(this) {
             shopListAdapter.submitList(it)
@@ -24,9 +29,27 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         val button = findViewById<FloatingActionButton>(R.id.button_add_shop_item)
         button.setOnClickListener {
-            val intent = ShopItemActivity.newIntentAddItem(this)
-            startActivity(intent)
+            if (isOnePaneMode()) {
+                val intent = ShopItemActivity.newIntentAddItem(this)
+                startActivity(intent)
+            } else {
+                val fragment = ShopItemFragment.newInstanceAddItem()
+                launchFragment(fragment)
+            }
+
         }
+    }
+
+    private fun isOnePaneMode(): Boolean {
+        return container==null
+    }
+
+    private fun launchFragment(fragment: Fragment) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.shop_item_container_main, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun setupRecyclerView() {
@@ -56,8 +79,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupOnClickListener() {
         shopListAdapter.onShopItemClickListener = {
-            val intent = ShopItemActivity.newIntentEditItem(this, it.id)
-            startActivity(intent)
+            if (isOnePaneMode()) {
+                val intent = ShopItemActivity.newIntentEditItem(this, it.id)
+                startActivity(intent)
+            } else {
+                val fragment = ShopItemFragment.newInstanceEditItem(it.id)
+                launchFragment(fragment)
+            }
         }
     }
 
@@ -67,13 +95,13 @@ class MainActivity : AppCompatActivity() {
         itemTouchHelper.attachToRecyclerView(rvShopList)
     }
 
-    private fun showSorryDialog() {
-        val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setTitle("Сорри")
-        alertDialog.setMessage("Пока нет возможности перейти к товару")
-        alertDialog.setPositiveButton("Ок") { dialog, i ->
-            dialog.cancel()
-        }
-        alertDialog.show()
-    }
+//    private fun showSorryDialog() {
+//        val alertDialog = AlertDialog.Builder(this)
+//        alertDialog.setTitle("Сорри")
+//        alertDialog.setMessage("Пока нет возможности перейти к товару")
+//        alertDialog.setPositiveButton("Ок") { dialog, i ->
+//            dialog.cancel()
+//        }
+//        alertDialog.show()
+//    }
 }
