@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.myshoppinglist.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class ShopItemActivity : AppCompatActivity() {
+class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishListener {
 
     private var screenMode = SCREEN_MODE_DEFAULT
     private var id = ID_DEFAULT
@@ -76,5 +77,10 @@ class ShopItemActivity : AppCompatActivity() {
             return intent
         }
 
+    }
+
+    override fun onEditingFinished() {
+        Toast.makeText(this@ShopItemActivity, "Success", Toast.LENGTH_SHORT).show()
+        finish()
     }
 }
