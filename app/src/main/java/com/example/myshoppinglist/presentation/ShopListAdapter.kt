@@ -10,7 +10,7 @@ import com.example.myshoppinglist.R
 import com.example.myshoppinglist.domain.ShopItem
 import java.lang.RuntimeException
 
-class ShopListAdapter :ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCallback()) {
+class ShopListAdapter : ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCallback()) {
 
     var onShopItemLongClickListener: ((ShopItem) -> Unit)? = null
     var onShopItemClickListener: ((ShopItem) -> Unit)? = null
@@ -21,6 +21,8 @@ class ShopListAdapter :ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCal
         const val MAX_POOL_SIZE = 15
         // желательно проверить пул_сайз на слабых устройствах, устройствах с большим экраном - не создается ли слишком много вьюхолдеров?
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
         val view = when (viewType) {

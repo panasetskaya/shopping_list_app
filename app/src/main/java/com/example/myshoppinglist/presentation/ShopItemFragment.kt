@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.lang.RuntimeException
 
-class ShopItemFragment: Fragment() {
+class ShopItemFragment : Fragment() {
 
 
     private lateinit var tilName: TextInputLayout
@@ -33,8 +34,10 @@ class ShopItemFragment: Fragment() {
     private var screenMode = SCREEN_MODE_DEFAULT
     private var shopItemId = ID_DEFAULT
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
+
         if (context is OnEditingFinishListener) {
             onEditingFinishListener = context
         } else {
@@ -44,6 +47,7 @@ class ShopItemFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         parseParams()
     }
 
@@ -151,11 +155,11 @@ class ShopItemFragment: Fragment() {
             throw RuntimeException("No screen mode param")
         }
         val mode = args.getString(EXTRA_SCREEN_MODE)
-        if (mode!= MODE_EDIT && mode!= MODE_ADD) {
+        if (mode != MODE_EDIT && mode != MODE_ADD) {
             throw RuntimeException("Unknown param: screen mode $mode")
         }
         screenMode = mode
-        if (screenMode== MODE_EDIT) {
+        if (screenMode == MODE_EDIT) {
             if (!args.containsKey(EXTRA_SHOP_ITEM_ID)) {
                 throw RuntimeException("No param: shopItem id")
             }
@@ -176,7 +180,7 @@ class ShopItemFragment: Fragment() {
         private const val SCREEN_MODE_DEFAULT = ""
 
         fun newInstanceAddItem(): ShopItemFragment {
-            return ShopItemFragment(). apply {
+            return ShopItemFragment().apply {
                 arguments = Bundle().apply {
                     putString(EXTRA_SCREEN_MODE, MODE_ADD)
                 }

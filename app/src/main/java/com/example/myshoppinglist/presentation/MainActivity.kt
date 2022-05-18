@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishListen
     private fun setupRecyclerView() {
         val rvShopList = findViewById<RecyclerView>(R.id.recyclerViewShopList)
         shopListAdapter = ShopListAdapter()
+        shopListAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         with(rvShopList) {
             adapter = shopListAdapter
             recycledViewPool.setMaxRecycledViews(
