@@ -8,11 +8,11 @@ import com.example.myshoppinglist.domain.AddShopItemUseCase
 import com.example.myshoppinglist.domain.EditShopItemUseCase
 import com.example.myshoppinglist.domain.GetItemByIdUseCase
 import com.example.myshoppinglist.domain.ShopItem
-import java.lang.Exception
 
-class ShopItemViewModel: ViewModel() {
+class ShopItemViewModel : ViewModel() {
 
-    private val repository = ShopListRepositoryImpl //Нарушение: зависим от дата-слоя! Нужна инъекция зависимостей. Потом
+    private val repository =
+        ShopListRepositoryImpl //Нарушение: зависим от дата-слоя! Нужна инъекция зависимостей. Потом
 
     private val editShopItemUseCase = EditShopItemUseCase(repository)
     private val addShopItemUseCase = AddShopItemUseCase(repository)
@@ -70,7 +70,7 @@ class ShopItemViewModel: ViewModel() {
     private fun parseCount(inputCount: String?): Int {
         return try {
             inputCount?.trim()?.toInt() ?: 0
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             0
         }
     }
@@ -81,7 +81,7 @@ class ShopItemViewModel: ViewModel() {
             _nameErrorStateLiveData.value = true
             result = false
         }
-        if (count<=0) {
+        if (count <= 0) {
             _countErrorStateLiveData.value = true
             result = false
         }
