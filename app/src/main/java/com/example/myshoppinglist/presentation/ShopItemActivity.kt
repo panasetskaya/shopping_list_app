@@ -3,15 +3,9 @@ package com.example.myshoppinglist.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.myshoppinglist.R
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 
 class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishListener {
 
@@ -22,7 +16,7 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishLi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop_item)
         parseIntent()
-        if (savedInstanceState==null) {
+        if (savedInstanceState == null) {
             launchRightMode()
         }
 

@@ -22,7 +22,6 @@ class ShopListAdapter : ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCa
         // желательно проверить пул_сайз на слабых устройствах, устройствах с большим экраном - не создается ли слишком много вьюхолдеров?
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
 //        val binding = when (viewType) {
 //            ENABLED -> ItemEnabledBinding.inflate(

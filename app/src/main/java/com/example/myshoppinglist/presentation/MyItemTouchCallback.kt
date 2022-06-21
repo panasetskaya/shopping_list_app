@@ -8,7 +8,10 @@ import android.view.MotionEvent
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-open class MyItemTouchCallback(private val viewModel: MainViewModel, private val adapter: ShopListAdapter): ItemTouchHelper.Callback() {
+open class MyItemTouchCallback(
+    private val viewModel: MainViewModel,
+    private val adapter: ShopListAdapter
+) : ItemTouchHelper.Callback() {
 
     private var swipeback = false
     private var isAlertDialogShowed = false
