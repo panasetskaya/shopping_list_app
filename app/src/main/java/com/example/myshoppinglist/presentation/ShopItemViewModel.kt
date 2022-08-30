@@ -1,25 +1,21 @@
 package com.example.myshoppinglist.presentation
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myshoppinglist.data.ShopListRepositoryImpl
 import com.example.myshoppinglist.domain.AddShopItemUseCase
 import com.example.myshoppinglist.domain.EditShopItemUseCase
 import com.example.myshoppinglist.domain.GetItemByIdUseCase
 import com.example.myshoppinglist.domain.ShopItem
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ShopItemViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository =
-        ShopListRepositoryImpl(application) //Нарушение: зависим от дата-слоя! Нужна инъекция зависимостей. Потом
-
-    private val editShopItemUseCase = EditShopItemUseCase(repository)
-    private val addShopItemUseCase = AddShopItemUseCase(repository)
-    private val getItemByIdUseCase = GetItemByIdUseCase(repository)
+class ShopItemViewModel @Inject constructor(
+    private val editShopItemUseCase: EditShopItemUseCase,
+    private val addShopItemUseCase: AddShopItemUseCase,
+    private val getItemByIdUseCase: GetItemByIdUseCase
+) : ViewModel() {
 
     private val _nameErrorStateLiveData = MutableLiveData<Boolean>()
     val nameErrorStateLiveData: LiveData<Boolean>
