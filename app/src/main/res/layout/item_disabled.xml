@@ -28,7 +28,6 @@
                 android:layout_weight="5"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 tools:text="Продукт" />
 
             <TextView
@@ -38,7 +37,6 @@
                 android:layout_weight="1"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 tools:text="1" />
 
         </LinearLayout>

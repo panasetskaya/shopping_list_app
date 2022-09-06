@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.MotionEvent
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myshoppinglist.R
 
 open class MyItemTouchCallback(
     private val viewModel: MainViewModel,
@@ -50,19 +51,18 @@ open class MyItemTouchCallback(
         isCurrentlyActive: Boolean
     ) {
         setTouchListener(recyclerView)
-        Log.d("MyTag", "show dX: $dX")
         if (dX > -300f && !isAlertDialogShowed) {
             isAlertDialogShowed = true
             val alertDialog = AlertDialog.Builder(recyclerView.context).setCancelable(false)
-            alertDialog.setTitle("Удаление")
-            alertDialog.setMessage("Вы уверены, что хотите удалить этот товар из списка?")
-            alertDialog.setPositiveButton("Да") { dialog, i ->
+            alertDialog.setTitle(R.string.delete)
+            alertDialog.setMessage(R.string.sure)
+            alertDialog.setPositiveButton(R.string.yes) { dialog, i ->
                 val item = adapter.currentList[viewHolder.adapterPosition]
                 viewModel.deleteShopItem(item)
                 isAlertDialogShowed = false
                 dialog.cancel()
             }
-            alertDialog.setNegativeButton("Нет") { dialog, i ->
+            alertDialog.setNegativeButton(R.string.no) { dialog, i ->
                 isAlertDialogShowed = false
                 dialog.cancel()
             }
