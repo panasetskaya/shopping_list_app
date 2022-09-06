@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.MainActivity"
+    android:background="@drawable/background_gradient">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewShopList"
@@ -17,7 +18,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_enabled"/>
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_add_shop_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +28,9 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline50percent"
         android:clickable="true"
         android:focusable="true"
+        android:gravity="center"
         android:textColor="@color/secondaryTextColor"
+        android:background="@drawable/button_drawable"
         android:backgroundTint="@color/secondaryDarkColor"
         android:text="@string/new_item"
         app:srcCompat="@android:drawable/ic_input_add"

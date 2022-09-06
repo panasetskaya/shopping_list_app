@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/background_gradient.xml" value="0.249" />
+        <entry key="app/src/main/res/drawable/button_drawable.xml" value="0.249" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.191" />
         <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23822463768115942" />

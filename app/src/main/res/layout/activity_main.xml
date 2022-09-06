@@ -5,7 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.MainActivity"
+    android:background="@drawable/background_gradient">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_add_shop_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/new_item"
+        android:gravity="center"
+        android:textColor="@color/secondaryTextColor"
+        android:background="@drawable/button_drawable"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
+        android:focusable="true"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/add_new_item_to_the_list"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewShopList"
@@ -19,21 +37,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_enabled"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_add_shop_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/new_item"
-        android:textColor="@color/secondaryTextColor"
-        android:backgroundTint="@color/secondaryDarkColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:clickable="true"
-        android:focusable="true"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:contentDescription="@string/add_new_item_to_the_list"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
