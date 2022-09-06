@@ -17,7 +17,7 @@
     </style>
 
     <style name="TextAppearance.Shop.Enabled" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:fontFamily">@font/karla</item>
@@ -25,6 +25,7 @@
 
     <style name="TextAppearance.Shop.Disabled" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">18sp</item>
+
         <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:fontFamily">@font/karla</item>
     </style>

@@ -19,8 +19,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:hintTextColor="@color/primaryDarkColor"
         app:nameErrorStateLiveData="@{viewModel.nameErrorStateLiveData}"
         app:layout_constraintBottom_toTopOf="@+id/til_count"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +33,7 @@
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name:"
+            android:hint="Item"
             android:inputType="textCapWords"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -41,8 +42,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:countErrorStateLiveData="@{viewModel.countErrorStateLiveData}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +55,7 @@
             android:id="@+id/et_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Count:"
+            android:hint="Count"
             android:inputType="textCapWords"/>
     </com.google.android.material.textfield.TextInputLayout>
 
