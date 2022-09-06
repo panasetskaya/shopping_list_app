@@ -1,5 +1,6 @@
 package com.example.myshoppinglist.presentation
 
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myshoppinglist.R
-import com.example.myshoppinglist.ShoppingApp
+import com.example.myshoppinglist.application.ShoppingApp
 import com.example.myshoppinglist.databinding.ActivityMainBinding
 import javax.inject.Inject
 
@@ -45,6 +46,10 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishListen
                 launchFragment(fragment)
             }
         }
+        contentResolver.query(
+            Uri.parse("content://com.example.myshoppinglist/shop_items"),
+            null, null, null, null, null
+        )
     }
 
     private fun isOnePaneMode(): Boolean {
