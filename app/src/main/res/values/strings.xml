@@ -8,4 +8,5 @@
     <string name="sure">Are you sure you want to delete it?</string>
     <string name="yes">Sure</string>
     <string name="no">Cancel</string>
+    <string name="new_item">ADD</string>
 </resources>

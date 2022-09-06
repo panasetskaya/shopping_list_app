@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/til_count"
         android:text="@string/add_item"
         android:textColor="@color/secondaryTextColor"
-        android:backgroundTint="@color/secondaryColor"/>
+        android:backgroundTint="@color/secondaryDarkColor"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
